@@ -15,6 +15,9 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+- task: CmdLine@2
+  inputs:
+    script: 'donet pack'
 
 - task: ArtifactoryGenericUpload@2
   inputs:
