@@ -15,3 +15,18 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+
+- task: ArtifactoryGenericUpload@2
+  inputs:
+    artifactoryService: 'JFrog Artifactory - Shivani'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "*.nupkg",
+            "target": "uploadartifacts-generic-local/"
+          }
+        ]
+      }
+    failNoOp: true
